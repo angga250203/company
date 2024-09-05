@@ -7,7 +7,7 @@ import React from 'react'
 export default function Page() {
   return (
     <div className='bg-black'>
-        <Navbar/>
+       
         <Section1/>
         <Section2/>
         <Section3/>

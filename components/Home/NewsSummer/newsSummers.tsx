@@ -1,13 +1,30 @@
-import React, { useState } from 'react';
+'use client'
+
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { IoArrowForwardCircleOutline } from 'react-icons/io5';
 import {motion} from 'framer-motion'
 import { FaArrowRight } from 'react-icons/fa6';
 import { BsArrowRightCircle } from "react-icons/bs";
 import Cards from './cards';
-
+import Card from './cards';
+import path from 'path';
+import fs from 'fs';
 
 function NewsSummer() {
+    const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch('/data.json'); // Mengambil file JSON dari direktori publik
+      const jsonData = await response.json();
+      console.log(jsonData)
+      setData(jsonData.slice(0, 3)); // Asumsi bahwa struktur data adalah { blog: [...] }
+    };
+
+    fetchData();
+  }, []);
+
 
   return (
     <div className='mt-24 mb-20 relative'>
@@ -21,12 +38,13 @@ function NewsSummer() {
           <button className='flex items-center gap-2'>More Article <BsArrowRightCircle className='text-xl'/></button>
         </div>
 
-        <Cards/>
+        <Card articles={data}/>
 
       
       </div>
     </div>
   );
 }
+
 
 export default NewsSummer;

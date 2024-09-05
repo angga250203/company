@@ -1,4 +1,9 @@
+'use client'
+
 import React from 'react'
+import { footerLink, Medsos } from './data/data'
+import Link from 'next/link'
+import RoundedButton from '../utils/buttonanim'
 
 
 
@@ -13,9 +18,12 @@ function Footer() {
           <div className='w-full md:w-7/12'>
               <h1 className='text-white text-3xl'>Let’s start a conversation</h1>
               <p className='text-gray-400 mt-2 text-sm'>Join us for a chat to talk about your business</p>
-              <button className='px-5 py-2 bg-blue-500 hover:bg-white hover:text-black transition-all text-white rounded-full mt-5'>
-                Get in touch
-              </button>
+              <div className='flex'>
+              <RoundedButton className='bg-white px-5 py-2 mt-4 rounded-full'>
+                <p className='z-10'>Get in touch</p>
+              </RoundedButton>
+              </div>
+             
           </div>
       </div>
 
@@ -26,19 +34,36 @@ function Footer() {
         </div>
         <div className='w-full md:w-7/12 mt-16 md:mt-0 flex gap-20'>
             <div>
-              <h1 className='text-gray-400'>Sitemap</h1>
-              <p className='text-white py-1 mt-4 text-sm'>Home</p>
-              <p className='text-white py-1 text-sm'>About</p>
-              <p className='text-white py-1 text-sm'>News</p>
-              <p className='text-white py-1 text-sm'>Product</p>
+              <h1 className='text-gray-400 mb-4'>Sitemap</h1>
+              
+              {footerLink.map ((footer,index) => {
+                return(
+                  <Link href={footer.href}>
+                  <div className='flex ' key={index}>
+                  <p className='text-white uppercase under cursor-pointer py-1  text-sm'>{footer.title}</p>
+                  </div>
+                  </Link>
+                )
+              })}
+            
+        
+          
             </div>
 
 
             <div>
-            <h1 className='text-gray-400'>Follow</h1>
-              <p className='text-white py-1 mt-4 text-sm'>Instagram</p>
-              <p className='text-white py-1 text-sm'>Twitter/X</p>
-              <p className='text-white py-1 text-sm'>Linkedin</p>
+            <h1 className='text-gray-400 mb-4'>Follow</h1>
+
+            {Medsos.map((medsos,index) => {
+              return(
+                <Link href={medsos.link}>
+                  <div className='flex ' key={index}>
+                  <p className='text-white uppercase under cursor-pointer py-1  text-sm'>{medsos.name}</p>
+                  </div>
+                </Link>
+              )
+            })}
+              
             </div>
         </div>
 

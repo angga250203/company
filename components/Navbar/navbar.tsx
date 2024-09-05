@@ -78,12 +78,12 @@ function Navbar() {
     // transition={transition}
     // variants={variants}
    >
-    <div className=' max-w-7xl  mx-auto py-7 justify-between  flex items-center'>
+    <div className=' max-w-7xl  mx-auto py-5 md:py-7 justify-between  flex items-center'>
       <Link href={`/`}>
-        <h1 className={bgchange  ?'text-[1.7rem] cursor-pointer font-bold':'text-[1.7rem] text-white cursor-pointer font-bold'}>Techn</h1>
+        <h1 className={bgchange  ?'text-[1.7rem] cursor-pointer font-bold':'text-[1.7rem] text-black cursor-pointer font-bold'}>Techn</h1>
      </Link>
       <div
-      className={bgchange ? 'lg:flex hidden text-gray-900 items-center gap-7 text-lg':'lg:flex hidden text-gray-100 items-center gap-7 text-lg'}>
+      className={bgchange ? 'lg:flex hidden text-gray-900 items-center gap-7 text-lg':'lg:flex hidden text-gray-900 items-center gap-7 text-lg'}>
         <Link href={`/about`}>
         <PerspektifText label="about"/>
         </Link>
@@ -96,11 +96,13 @@ function Navbar() {
     
       </div>
 
+      <div className='hidden md:block'>
       <Link href={`/contact`}>
-        <RoundedButton className='bg-purple-400 hidden md:block px-5 py-3 rounded-full '> 
+        <RoundedButton className='bg-black px-5 py-3 rounded-full '> 
           <h1 className='text-white z-10'>Contact</h1>
         </RoundedButton>
       </Link>
+      </div>
 
         <div className='block md:hidden'>
         <MobileNva navLinks={navLinks} bgchange={bgchange}/>

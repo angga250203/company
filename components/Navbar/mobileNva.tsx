@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {motion,AnimatePresence} from 'framer-motion'
 import Link from 'next/link';
+import { ArrowRightIcon } from '@radix-ui/react-icons';
 
 
 
@@ -80,6 +81,29 @@ interface navLinksProps{
           },
         },
       };
+
+      useEffect(() => {
+        if (open) {
+          // Prevent scroll
+          document.body.style.overflow = 'hidden';
+    
+          // Add event listeners to close menu if scrolling is attempted
+          const handleScroll = () => {
+            setOpen(false);
+          };
+    
+          window.addEventListener('touchmove', handleScroll, { passive: false });
+          window.addEventListener('wheel', handleScroll, { passive: false });
+    
+          return () => {
+            // Cleanup
+            document.body.style.overflow = '';
+            window.removeEventListener('touchmove', handleScroll);
+            window.removeEventListener('wheel', handleScroll);
+          };
+        }
+      }, [open]);
+    
     
   return (
     <div>
@@ -96,7 +120,7 @@ interface navLinksProps{
             initial="initial"
             animate="animate"
             exit="exit"
-            className="fixed z-50 left-0 top-0 w-full h-screen origin-top backdrop-blur-2xl bg-black/60 text-white p-10"
+            className="fixed z-50 left-0 top-0 w-full h-screen origin-top backdrop-blur-3xl bg-black/90 text-white p-10"
           >
             <div className="flex h-full flex-col">
               <div className="flex overflow-hidden justify-end">
@@ -118,7 +142,7 @@ interface navLinksProps{
                 initial="initial"
                 animate="open"
                 exit="initial"
-                className=" absolute bottom-16  "
+                className=" absolute bottom-32  "
               >
                 {navLinks.map((link, index) => {
                   return (
@@ -128,9 +152,18 @@ interface navLinksProps{
                         title={link.title}
                         href={link.href}
                       />
+                     
                     </div>
                   );
                 })}
+                <div className='overflow-hidden'>
+                 <motion.button
+                 variants={mobileLinkVars}
+                 className='mt-5 uppercase items-center text-2xl flex rounded-lg py-3'>
+                        <p className=''>Contact</p>
+                        <ArrowRightIcon className='text-2xl'/>
+                  </motion.button>
+                  </div>
               </motion.div>
             </div>
           </motion.div>
